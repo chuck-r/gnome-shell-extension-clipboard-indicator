@@ -387,8 +387,9 @@ const ClipboardIndicator = GObject.registerClass({
         // Empty state section
         this.emptyStateSection = new St.BoxLayout({
             style_class: 'clipboard-indicator-empty-state',
-            vertical: true
         });
+        if ('orientation' in St.BoxLayout.prototype) this.emptyStateSection.orientation = Clutter.Orientation.VERTICAL;
+        else this.emptyStateSection.vertical = true;
         this.emptyStateSection.add_child(new St.Icon({
             icon_name: INDICATOR_ICON,
             style_class: 'system-status-icon clipboard-indicator-icon',
@@ -1845,8 +1846,9 @@ const ClipboardIndicator = GObject.registerClass({
             style_class: 'ci-edit-textbox',
             x_expand: true,
             y_expand: true,
-            vertical: true,
         });
+        if ('orientation' in St.BoxLayout.prototype) textBox.orientation = Clutter.Orientation.VERTICAL;
+        else textBox.vertical = true;
 
         textBox.add_child(clutterText);
 

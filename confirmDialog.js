@@ -25,14 +25,16 @@ const ConfirmDialog = GObject.registerClass(
     _init(title, desc, ok_label, cancel_label, callback) {
       super._init();
 
-      let main_box = new St.BoxLayout({
-        vertical: false
-      });
+      let main_box = new St.BoxLayout();
+      if ('orientation' in St.BoxLayout.prototype) main_box.orientation = Clutter.Orientation.HORIZONTAL;
+      else main_box.vertical = false;
+
       this.contentLayout.add_child(main_box);
 
-      let message_box = new St.BoxLayout({
-        vertical: true
-      });
+      let message_box = new St.BoxLayout();
+      if ('orientation' in St.BoxLayout.prototype) message_box.orientation = Clutter.Orientation.VERTICAL;
+      else message_box.vertical = true;
+
       main_box.add_child(message_box);
 
       let subject_label = new St.Label({
